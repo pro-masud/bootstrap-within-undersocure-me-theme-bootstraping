@@ -43,3 +43,16 @@ if ( class_exists( 'Jetpack' ) ) {
 foreach ( $understrap_includes as $file ) {
 	require_once get_theme_file_path( $understrap_inc_dir . $file );
 }
+
+function shop_page_column_now($colum){
+	return $colum = 6;
+}
+add_filter("loop_shop_columns", "shop_page_column_now");
+
+
+// remove some product in shop page this function
+function mrc_woocommers_product_query($wq){
+	$wq->set("post__not_in", array('82', '80'));
+	return $wq;
+}
+add_filter("woocommerce_product_query", "mrc_woocommers_product_query");
